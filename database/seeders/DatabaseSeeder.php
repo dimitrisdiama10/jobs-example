@@ -28,6 +28,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Job::factory(200)->create();
-
     }
 }

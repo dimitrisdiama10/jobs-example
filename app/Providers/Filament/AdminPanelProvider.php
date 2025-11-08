@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Settings\LogoSettings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -23,6 +24,8 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $logoSettings = app(LogoSettings::class);
+
         return $panel
             ->default()
             ->id('admin')
@@ -30,8 +33,10 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->authGuard('admin')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Purple,
             ])
+            ->brandLogo($logoSettings->logo ? asset('storage/' . $logoSettings->logo) : null)
+            ->brandLogoHeight($logoSettings->logo_height)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

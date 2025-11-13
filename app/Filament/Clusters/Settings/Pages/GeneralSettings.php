@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Clusters\Settings\Pages;
 
-use App\Settings;
+use App\Filament\Clusters\Settings\SettingsCluster;
 use BackedEnum;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -11,9 +11,11 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 
-class LogoSettings extends SettingsPage
+class GeneralSettings extends SettingsPage
 {
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+
+    protected static ?string $cluster = SettingsCluster::class;
 
     public function form(Schema $schema): Schema
     {
@@ -28,7 +30,20 @@ class LogoSettings extends SettingsPage
 
                         TextInput::make('logo_height')
                             ->required(),
+
+                        TextInput::make('copyright')
+                            ->required()
                     ])
             ]);
     }
+    public static function getNavigationLabel(): string
+    {
+        return __('General Settings');
+    }
+
+    public function getTitle(): string
+    {
+        return __('General Settings');
+    }
+
 }

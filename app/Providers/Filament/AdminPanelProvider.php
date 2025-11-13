@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Settings\GeneralSettings;
 use App\Settings\LogoSettings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -24,7 +25,7 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $logoSettings = app(LogoSettings::class);
+        $generalSettings = app(GeneralSettings::class);
 
         return $panel
             ->default()
@@ -35,10 +36,11 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Purple,
             ])
-            ->brandLogo($logoSettings->logo ? asset('storage/' . $logoSettings->logo) : null)
-            ->brandLogoHeight($logoSettings->logo_height)
+            ->brandLogo($generalSettings->logo ? asset('storage/' . $generalSettings->logo) : null)
+            ->brandLogoHeight($generalSettings->logo_height)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverClusters(in:app_path('Filament/Clusters'), for:'App\Filament\Clusters')
             ->pages([
                 Dashboard::class,
             ])

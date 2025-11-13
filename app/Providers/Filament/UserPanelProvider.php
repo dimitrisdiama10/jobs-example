@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Settings\GeneralSettings;
 use App\Settings\LogoSettings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -24,7 +25,7 @@ class UserPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $logoSettings = app(LogoSettings::class);
+        $generalSettings = app(GeneralSettings::class);
 
         return $panel
             ->id('user')
@@ -37,8 +38,8 @@ class UserPanelProvider extends PanelProvider
                 'primary' => Color::Cyan,
             ])
             ->databaseNotifications()
-            ->brandLogo($logoSettings->logo ? asset('storage/' . $logoSettings->logo) : null)
-            ->brandLogoHeight($logoSettings->logo_height)
+            ->brandLogo($generalSettings->logo ? asset('storage/' . $generalSettings->logo) : null)
+            ->brandLogoHeight($generalSettings->logo_height)
             ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\Filament\User\Resources')
             ->discoverPages(in: app_path('Filament/User/Pages'), for: 'App\Filament\User\Pages')
             ->pages([

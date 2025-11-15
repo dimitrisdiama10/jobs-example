@@ -49,10 +49,10 @@ class User extends Authenticatable
         ];
     }
 
-    public function getNameAttribute(): string
-    {
-        return trim("{$this->name} ") ?: 'Admin';
-    }
+    // public function getNameAttribute(): string
+    // {
+    //     return trim("{$this->name} ") ?: 'Admin';
+    // }
 
     public function sendEmailVerificationNotification()
     {

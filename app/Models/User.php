@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function getNameAttribute(): string
     {
-        return trim("{$this->first_name} {$this->last_name}") ?: 'Admin';
+        return trim("{$this->name} ") ?: 'Admin';
     }
 
     public function sendEmailVerificationNotification()
